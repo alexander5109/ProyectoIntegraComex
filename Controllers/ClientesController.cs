@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProyectoComex.Data;
 using ProyectoComex.Models;
 
@@ -9,9 +10,9 @@ namespace ProyectoComex.Controllers {
 			_context = context;
 		}
 
-		public IActionResult Index() {
+		public async Task<IActionResult> Index() {
 
-			List<Cliente> clientes = _context.Clientes.ToList();
+			List<Cliente> clientes = await _context.Clientes.ToListAsync();
 			return View(clientes);
 		}
 
@@ -24,10 +25,10 @@ namespace ProyectoComex.Controllers {
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Create(Cliente cliente) {
+		public async Task<IActionResult> Create(Cliente cliente) {
 			if (ModelState.IsValid) {
-				_context.Clientes.Add(cliente);
-				_context.SaveChanges();
+				await _context.Clientes.AddAsync(cliente);
+				await _context.SaveChangesAsync();
 				return RedirectToAction("Index");
 			}
 			return View(cliente);
