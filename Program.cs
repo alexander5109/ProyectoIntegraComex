@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoComex.Data;
+using ProyectoComex.Data.Service;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddControllersWithViews();
 var dbPath = Path.Combine(AppContext.BaseDirectory, "database\\database.sqlite3");
 builder.Services.AddDbContext<ComexContext>(options => options.UseSqlite($"Data Source={dbPath}"));
 
+
+builder.Services.AddScoped<IComexService, ClienteService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

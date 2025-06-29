@@ -2,18 +2,18 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoComex.Data;
 using ProyectoComex.Models;
+using ProyectoComex.Data.Service;
+
 
 namespace ProyectoComex.Controllers {
 	public class ClientesController : Controller {
-		private readonly ComexContext _context;
-		public ClientesController(ComexContext context) {
-			_context = context;
+		private readonly IComexService _service;
+		public ClientesController(IComexService service) {
+			_service = service;
 		}
 
 		public async Task<IActionResult> Index() {
-
-			List<Cliente> clientes = await _context.Clientes.ToListAsync();
-			return View(clientes);
+			return View(await _service.ReadClientes());
 		}
 
 
@@ -27,8 +27,7 @@ namespace ProyectoComex.Controllers {
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create(Cliente cliente) {
 			if (ModelState.IsValid) {
-				await _context.Clientes.AddAsync(cliente);
-				await _context.SaveChangesAsync();
+				await _service.CreateCliente(cliente);
 				return RedirectToAction("Index");
 			}
 			return View(cliente);
