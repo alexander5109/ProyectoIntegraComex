@@ -1,0 +1,38 @@
+﻿@model ProyectoComex.Models.Cliente
+
+<div class="container">
+    <h2>Agregar cliente</h2>
+
+    <form asp-action="Create" method="post">
+        <div class="mb-3">
+            <label asp-for="CUIT" class="form-label"></label>
+            <input asp-for="CUIT" class="form-control" />
+            <span asp-validation-for="CUIT" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="RazonSocial" class="form-label"></label>
+            <input asp-for="RazonSocial" class="form-control" />
+            <span asp-validation-for="RazonSocial" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Telefono" class="form-label"></label>
+            <input asp-for="Telefono" class="form-control" />
+            <span asp-validation-for="Telefono" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Direccion" class="form-label"></label>
+            <input asp-for="Direccion" class="form-control" />
+            <span asp-validation-for="Direccion" class="text-danger"></span>
+        </div>
+
+        <div class="form-check mb-3">
+            <input asp-for="Activo" class="form-check-input" />
+            <label asp-for="Activo" class="form-check-label"></label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
