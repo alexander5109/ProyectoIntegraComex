@@ -4,6 +4,7 @@
     <h2>Agregar cliente</h2>
 
     <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
         <div class="mb-3">
             <label asp-for="CUIT" class="form-label"></label>
             <input asp-for="CUIT" class="form-control" />

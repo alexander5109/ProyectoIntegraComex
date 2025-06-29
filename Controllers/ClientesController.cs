@@ -14,17 +14,23 @@ namespace ProyectoComex.Controllers {
 			List<Cliente> clientes = _context.Clientes.ToList();
 			return View(clientes);
 		}
+
+
+		[HttpGet]
 		public IActionResult Create() {
 			return View();
 		}
+
+
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public IActionResult Create(Cliente cliente) {
 			if (ModelState.IsValid) {
 				_context.Clientes.Add(cliente);
 				_context.SaveChanges();
 				return RedirectToAction("Index");
 			}
-			return View();
+			return View(cliente);
 		}
 	}
 }
