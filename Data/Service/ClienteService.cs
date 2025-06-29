@@ -15,12 +15,19 @@ namespace ProyectoComex.Data.Service {
 		}
 
 
-
 		public async Task<IEnumerable<Cliente>> ReadClientes() {
 			return await _context.Clientes.ToListAsync();
 		}
 
 
 
+		public async Task<Cliente?> GetCliente(int id) {
+			return await _context.Clientes.FindAsync(id);
+		}
+
+		public async Task UpdateCliente(Cliente cliente) {
+			await _context.Clientes.AddAsync(cliente);
+			await _context.SaveChangesAsync();
+		}
 	}
 }

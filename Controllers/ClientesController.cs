@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProyectoComex.Data;
-using ProyectoComex.Models;
 using ProyectoComex.Data.Service;
+using ProyectoComex.Models;
+using System.Data.Entity;
 
 
 namespace ProyectoComex.Controllers {
@@ -21,6 +22,34 @@ namespace ProyectoComex.Controllers {
 		public IActionResult Create() {
 			return View();
 		}
+
+
+
+
+		//[HttpGet]
+		public async Task<IActionResult> Update(int? id) {
+			if (id == null)
+				return NotFound();
+			var cliente = await _service.GetCliente(id.Value);
+
+			if (cliente == null)
+				return NotFound();
+
+			return View(cliente);
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Update(int? id) {
+			if (ModelState.IsValid) {
+				await _service.UpdateCliente(cliente);
+				return RedirectToAction("Index");
+			}
+			return View(cliente);
+		}
+
+
+
+
 
 
 		[HttpPost]
