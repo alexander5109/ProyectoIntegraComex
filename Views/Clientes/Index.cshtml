@@ -13,6 +13,7 @@
 				<th>Telefono</th>
 				<th>Direccion</th>
 				<th>Activo</th>
+				<th>Enlace</th>
 			</tr>
 			
 		</thead>
@@ -26,6 +27,10 @@
 					<td>@item.Telefono</td>
 					<td>@item.Direccion</td>
 					<td>@item.Activo</td>
+					<td>
+						<a href="@Url.Action("Edit", "Cliente", new { id = item.Id })">Editar</a>
+						@* /{controller}/{action}/{id?} *@
+					</td>
 				</tr>
 				
 			}
