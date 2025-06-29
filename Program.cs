@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using ProyectoComex.Data;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// ruta relativa al .exe (osea bin\Debug\net8.0\)
+var dbPath = Path.Combine(AppContext.BaseDirectory, "database\\database.sqlite3");
+builder.Services.AddDbContext<ComexContext>(options => options.UseSqlite($"Data Source={dbPath}"));
 
 var app = builder.Build();
 
