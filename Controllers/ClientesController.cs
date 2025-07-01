@@ -13,20 +13,36 @@ namespace ProyectoComex.Controllers {
 			_service = service;
 		}
 
+
+
+
+		//Create
+		[HttpGet]
+		public IActionResult Create() {
+			return View();
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Create(Cliente cliente) {
+			if (ModelState.IsValid) {
+				await _service.CreateCliente(cliente);
+				return RedirectToAction("Index");
+			}
+			return View(cliente);
+		}
+
+
+
+		//Read
 		public async Task<IActionResult> Index() {
 			return View(await _service.ReadClientes());
 		}
 
 
+
+
+		//Update
 		[HttpGet]
-		public IActionResult Create() {
-			return View();
-		}
-
-
-
-
-		//[HttpGet]
 		public async Task<IActionResult> Update(int? id) {
 			if (id == null)
 				return NotFound();
@@ -39,27 +55,18 @@ namespace ProyectoComex.Controllers {
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Update(int? id) {
+		public async Task<IActionResult> Update(Cliente remotecliente) {
 			if (ModelState.IsValid) {
-				await _service.UpdateCliente(cliente);
-				return RedirectToAction("Index");
+				await _service.UpdateCliente(remotecliente);
+				return RedirectToAction("Index");   //simply return the get version of the page
 			}
-			return View(cliente);
+			return View(remotecliente);	//return the same page (or do nothing)
 		}
 
 
 
+		//Delete
 
 
-
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create(Cliente cliente) {
-			if (ModelState.IsValid) {
-				await _service.CreateCliente(cliente);
-				return RedirectToAction("Index");
-			}
-			return View(cliente);
-		}
 	}
 }
