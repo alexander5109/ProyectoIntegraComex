@@ -9,11 +9,6 @@ namespace ProyectoComex.Data.Service {
 		}
 
 
-		public async Task CreateCliente(Cliente cliente) {
-			await _context.Clientes.AddAsync(cliente);
-			await _context.SaveChangesAsync();
-		}
-
 
 		public async Task<IEnumerable<Cliente>> ReadClientes() {
 			return await _context.Clientes.ToListAsync();
@@ -25,8 +20,13 @@ namespace ProyectoComex.Data.Service {
 			return await _context.Clientes.FindAsync(id);
 		}
 
-		public async Task UpdateCliente(Cliente cliente) {
+		public async Task CreateCliente(Cliente cliente) {
 			await _context.Clientes.AddAsync(cliente);
+			await _context.SaveChangesAsync();
+		}
+
+		public async Task UpdateCliente(Cliente cliente) {
+			_context.Clientes.Update(cliente);
 			await _context.SaveChangesAsync();
 		}
 	}

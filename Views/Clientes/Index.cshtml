@@ -28,7 +28,8 @@
 					<td>@item.Direccion</td>
 					<td>@item.Activo</td>
 					<td>
-						<a href="@Url.Action("Edit", "Cliente", new { id = item.Id })">Editar</a>
+						@* <a href="@Url.Action("Update", "Clientes", new { id = item.Id })">Editar</a> *@
+						<a asp-action="Update" asp-route-id="@item.Id">Editar</a>
 						@* /{controller}/{action}/{id?} *@
 					</td>
 				</tr>
