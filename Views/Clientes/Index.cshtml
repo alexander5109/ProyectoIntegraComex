@@ -31,6 +31,8 @@
 						@* <a href="@Url.Action("Update", "Clientes", new { id = item.Id })">Editar</a> *@
 						<a asp-action="Update" asp-route-id="@item.Id">Editar</a>
 						@* /{controller}/{action}/{id?} *@
+
+						<a href="#" class="delete-link" data-id="@item.Id">Eliminar</a>
 					</td>
 				</tr>
 				
@@ -39,6 +41,31 @@
 		</tbody>
 
 	</table>
-
+	<form id="deleteForm" method="post" asp-action="Delete" asp-controller="Clientes">
+		<input type="hidden" name="id" id="deleteId" />
+	</form>
 </div>
 
+@section Scripts {
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const deleteLinks = document.querySelectorAll(".delete-link");
+			const form = document.getElementById("deleteForm");
+			const input = document.getElementById("deleteId");
+
+			deleteLinks.forEach(link => {
+				link.addEventListener("click", function (event) {
+					event.preventDefault();
+
+					const id = this.getAttribute("data-id");
+					const confirmed = confirm("¿Estás seguro de que querés eliminar este cliente?");
+
+					if (confirmed) {
+						input.value = id;
+						form.submit();
+					}
+				});
+			});
+		});
+	</script>
+}

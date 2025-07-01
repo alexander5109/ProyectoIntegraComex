@@ -1,22 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProyectoComex.Models;
 
-namespace ProyectoComex.Data.Service {
-	public class ClienteService : IComexService {
+namespace ProyectoComex.Data {
+	public class BaseDeDatos {
 		private readonly ComexContext _context;
-		public ClienteService(ComexContext context) {
+		public BaseDeDatos(ComexContext context) {
 			_context = context;
 		}
 
 
 
-		public async Task<IEnumerable<Cliente>> ReadClientes() {
+		public async Task<IEnumerable<Cliente>> ReadAllClientes() {
 			return await _context.Clientes.ToListAsync();
 		}
 
 
 
-		public async Task<Cliente?> GetCliente(int id) {
+		public async Task<Cliente?> ReadOneCliente(int id) {
 			return await _context.Clientes.FindAsync(id);
 		}
 
@@ -29,5 +29,14 @@ namespace ProyectoComex.Data.Service {
 			_context.Clientes.Update(cliente);
 			await _context.SaveChangesAsync();
 		}
+
+		public async Task DeleteCliente(int id) {
+			var cliente = await _context.Clientes.FindAsync(id);
+			if (cliente != null) {
+				_context.Clientes.Remove(cliente);
+				await _context.SaveChangesAsync();
+			}
+		}
+
 	}
 }

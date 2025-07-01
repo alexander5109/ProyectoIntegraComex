@@ -1,22 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProyectoComex.Data;
-using ProyectoComex.Data.Service;
 using ProyectoComex.Models;
 using System.Data.Entity;
 
 
 namespace ProyectoComex.Controllers {
 	public class ClientesController : Controller {
-		private readonly IComexService _service;
-		public ClientesController(IComexService service) {
+		private readonly BaseDeDatos _service;
+		public ClientesController(BaseDeDatos service) {
 			_service = service;
 		}
 
 
 
 
-		//Create
+		//CreateCliente
 		[HttpGet]
 		public IActionResult Create() {
 			return View();
@@ -35,18 +34,18 @@ namespace ProyectoComex.Controllers {
 
 		//Read
 		public async Task<IActionResult> Index() {
-			return View(await _service.ReadClientes());
+			return View(await _service.ReadAllClientes());
 		}
 
 
 
 
-		//Update
+		//UpdateCliente
 		[HttpGet]
 		public async Task<IActionResult> Update(int? id) {
 			if (id == null)
 				return NotFound();
-			var cliente = await _service.GetCliente(id.Value);
+			var cliente = await _service.ReadOneCliente(id.Value);
 
 			if (cliente == null)
 				return NotFound();
@@ -65,7 +64,13 @@ namespace ProyectoComex.Controllers {
 
 
 
-		//Delete
+		//DeleteCliente
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Delete(int id) {
+			await _service.DeleteCliente(id);
+			return RedirectToAction("Index");
+		}
 
 
 	}
