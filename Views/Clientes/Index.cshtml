@@ -1,4 +1,7 @@
-﻿@model IEnumerable<ProyectoComex.Models.Cliente> 
+﻿@model IEnumerable<ProyectoComex.Models.Cliente>
+@section Scripts {
+	<script src="~/js/confirmarDelete.js"></script>
+}
 
 <h2>Los clientes</h2>
 
@@ -47,31 +50,4 @@
 </div>
 <div>
 	<a asp-action="Create" asp-controller="Clientes" class="btn btn-primary">Agregar nuevo cliente</a>
-
-
-
 </div>
-
-@section Scripts {
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			const deleteLinks = document.querySelectorAll(".delete-link");
-			const form = document.getElementById("deleteForm");
-			const input = document.getElementById("deleteId");
-
-			deleteLinks.forEach(link => {
-				link.addEventListener("click", function (event) {
-					event.preventDefault();
-
-					const id = this.getAttribute("data-id");
-					const confirmed = confirm("¿Estás seguro de que querés eliminar este cliente?");
-
-					if (confirmed) {
-						input.value = id;
-						form.submit();
-					}
-				});
-			});
-		});
-	</script>
-}
