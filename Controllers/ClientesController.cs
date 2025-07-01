@@ -11,7 +11,7 @@ namespace ProyectoComex.Controllers {
 		public ClientesController(BaseDeDatos service) {
 			_service = service;
 		}
-
+		
 		[HttpGet]
 		public async Task<IActionResult> GetRazonSocial(string cuit) {
 			using var httpClient = new HttpClient();
@@ -42,13 +42,10 @@ namespace ProyectoComex.Controllers {
 		}
 
 
-
 		//Read
 		public async Task<IActionResult> Index() {
 			return View(await _service.ReadAllClientes());
 		}
-
-
 
 
 		//UpdateCliente
@@ -72,8 +69,6 @@ namespace ProyectoComex.Controllers {
 			}
 			return View(remotecliente);	//return the same page (or do nothing)
 		}
-
-
 
 		//DeleteCliente
 		[HttpPost]
