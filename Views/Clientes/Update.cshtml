@@ -1,4 +1,8 @@
 ﻿@model ProyectoComex.Models.Cliente
+@section Scripts {
+    <script src="~/js/getRazonSocial.js"></script>
+}
+
 
 <div class="container">
     <h2>Editar cliente</h2>
@@ -7,14 +11,15 @@
         @Html.AntiForgeryToken()
         <div class="mb-3">
             <label asp-for="CUIT" class="form-label"></label>
-            <input asp-for="CUIT" content" class="form-control" />
+            <input asp-for="CUIT" content" class="form-control" id="cuitInput" />
             <span asp-validation-for="CUIT" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
             <label asp-for="RazonSocial" class="form-label"></label>
-            <input asp-for="RazonSocial" class="form-control" />
+            <input asp-for="RazonSocial" type="text" class="form-control" id="razonSocialInput" placeholder="Ingrese su CUIL para averiguar su Razon Social..." />
             <span asp-validation-for="RazonSocial" class="text-danger"></span>
+
         </div>
 
         <div class="mb-3">

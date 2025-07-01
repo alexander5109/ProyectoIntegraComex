@@ -10,8 +10,8 @@ using ProyectoComex.Data;
 namespace ProyectoComex.Migrations
 {
     [DbContext(typeof(ComexContext))]
-    [Migration("20250629063759_firstClientes")]
-    partial class firstClientes
+    [Migration("20250701072608_primermigration")]
+    partial class primermigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,11 +44,41 @@ namespace ProyectoComex.Migrations
 
                     b.Property<string>("Telefono")
                         .IsRequired()
+                        .HasMaxLength(10)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.ToTable("Clientes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Activo = true,
+                            CUIT = "20345678901",
+                            Direccion = "Av. Mitre 1234",
+                            RazonSocial = "Ferretería San José",
+                            Telefono = "1123456789"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Activo = true,
+                            CUIT = "27345678902",
+                            Direccion = "Calle Falsa 123",
+                            RazonSocial = "Distribuidora El Sol",
+                            Telefono = "1134567890"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Activo = false,
+                            CUIT = "30765432109",
+                            Direccion = "San Martín 456",
+                            RazonSocial = "Panadería La Espiga",
+                            Telefono = "1145678901"
+                        });
                 });
 #pragma warning restore 612, 618
         }

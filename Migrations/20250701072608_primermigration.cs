@@ -2,10 +2,12 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ProyectoComex.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMigration : Migration
+    public partial class primermigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,13 +20,23 @@ namespace ProyectoComex.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     CUIT = table.Column<string>(type: "TEXT", maxLength: 11, nullable: false),
                     RazonSocial = table.Column<string>(type: "TEXT", nullable: false),
-                    Telefono = table.Column<string>(type: "TEXT", nullable: false),
+                    Telefono = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
                     Direccion = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     Activo = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clientes", x => x.Id);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "Id", "Activo", "CUIT", "Direccion", "RazonSocial", "Telefono" },
+                values: new object[,]
+                {
+                    { 1, true, "20345678901", "Av. Mitre 1234", "Ferretería San José", "1123456789" },
+                    { 2, true, "27345678902", "Calle Falsa 123", "Distribuidora El Sol", "1134567890" },
+                    { 3, false, "30765432109", "San Martín 456", "Panadería La Espiga", "1145678901" }
                 });
         }
 
