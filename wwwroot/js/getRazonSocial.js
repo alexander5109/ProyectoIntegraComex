@@ -6,18 +6,25 @@
         cuitInput.addEventListener('change', function () {
             var cuit = this.value;
             if (cuit.length === 11) {
-                fetch(`https://sistemaintegracomex.com.ar/Account/GetNombreByCuit?cuit=${cuit}`)
-                    //.then(response => response.json())
+                fetch(`/Clientes/GetRazonSocial?cuit=${cuit}`)
                     .then(response => response.text())
-                    .then(data => {
-                        console.log(data);
-                        razonSocialInput.value = data;
+                    .then(cadena => {
+                        cadena = cadena.trim();
+
+                        if (cadena === "@nombre") {
+                            throw new Error("CUIT no encontrado");
+                        } else {
+                            razonSocialInput.placeholder = '';
+                            razonSocialInput.value = cadena;
+                        }
                     })
                     .catch(() => {
-                        razonSocialInput.placeholder = 'Razon social no encontrada...';
+                        razonSocialInput.placeholder = 'Razón social no encontrada...';
+                        razonSocialInput.value = '';
                     });
             } else {
                 razonSocialInput.placeholder = '';
+                razonSocialInput.value = '';
             }
         });
     }

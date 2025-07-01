@@ -12,7 +12,18 @@ namespace ProyectoComex.Controllers {
 			_service = service;
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> GetRazonSocial(string cuit) {
+			using var httpClient = new HttpClient();
+			var url = $"https://sistemaintegracomex.com.ar/Account/GetNombreByCuit?cuit={cuit}";
 
+			try {
+				var razonSocial = await httpClient.GetStringAsync(url);
+				return Ok(razonSocial); // esto devuelve texto plano al cliente
+			} catch {
+				return NotFound("CUIT no válido");
+			}
+		}
 
 
 		//CreateCliente
