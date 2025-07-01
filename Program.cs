@@ -9,8 +9,8 @@ builder.Services.AddControllersWithViews();
 
 // ruta relativa al .exe (osea bin\Debug\net8.0\)
 var dbPath = Path.Combine(AppContext.BaseDirectory, "database\\database.sqlite3");
-builder.Services.AddDbContext<ComexContext>(options => options.UseSqlite($"Data Source={dbPath}"));
-
+builder.Services.AddDbContext<ComexContext>(options =>
+	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<BaseDeDatos>();
 var app = builder.Build();

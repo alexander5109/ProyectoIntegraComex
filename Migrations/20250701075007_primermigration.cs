@@ -16,13 +16,13 @@ namespace ProyectoComex.Migrations
                 name: "Clientes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CUIT = table.Column<string>(type: "TEXT", maxLength: 11, nullable: false),
-                    RazonSocial = table.Column<string>(type: "TEXT", nullable: false),
-                    Telefono = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
-                    Direccion = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
-                    Activo = table.Column<bool>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CUIT = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    RazonSocial = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Direccion = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Activo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

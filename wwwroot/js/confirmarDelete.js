@@ -1,8 +1,7 @@
-﻿
-document.addEventListener("DOMContentLoaded", function () {
+﻿document.addEventListener("DOMContentLoaded", function () {
 	const deleteLinks = document.querySelectorAll(".delete-link");
-const form = document.getElementById("deleteForm");
-const input = document.getElementById("deleteId");
+	const form = document.getElementById("deleteForm");
+	const input = document.getElementById("deleteId");
 
 	deleteLinks.forEach(link => {
 	link.addEventListener("click", function (event) {
