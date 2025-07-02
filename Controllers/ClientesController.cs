@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoComex.Data;
 using ProyectoComex.Models;
-using System.Data.Entity;
 
 
 namespace ProyectoComex.Controllers {
