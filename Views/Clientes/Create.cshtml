@@ -2,42 +2,59 @@
 @section Scripts {
     <script src="~/js/getRazonSocial.js"></script>
 }
+@{
+    ViewBag.Title = "Gestión de Clientes";
+    ViewBag.Subtitle = "Crear";
+}
 
-
-<div class="container">
-    <h2>Agregar cliente</h2>
-
-    <form asp-action="Create" method="post">
-        @Html.AntiForgeryToken()
-        <div class="mb-3">
-            <label asp-for="CUIT" class="form-label"></label>
-            <input asp-for="CUIT" class="form-control" id="cuitInput" />
-            <span asp-validation-for="CUIT" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="RazonSocial" class="form-label"></label>
-            <input asp-for="RazonSocial" type="text" class="form-control" id="razonSocialInput" placeholder="Ingrese su CUIL para averiguar su Razon Social..." />
-            <span asp-validation-for="RazonSocial" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="Telefono" class="form-label"></label>
-            <input asp-for="Telefono" class="form-control" placeholder="Ej: 1187654321" />
-            <span asp-validation-for="Telefono" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="Direccion" class="form-label"></label>
-            <input asp-for="Direccion" class="form-control" />
-            <span asp-validation-for="Direccion" class="text-danger"></span>
-        </div>
-
-        <div class="form-check mb-3">
-            <input asp-for="Activo" class="form-check-input" />
-            <label asp-for="Activo" class="form-check-label"></label>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </form>
+<div class="row justify-content-center mb-4">
+    <div class="col-lg-6 text-center">
+        <h2 class="mb-3">Alta de cliente</h2>
+            
+        <p class="lead">Complete el siguiente formulario para registrar un nuevo cliente.</p>
+        <p class="mb-0">La razón social se completara automaticamente si se encuentra el CUIT en el sistema de IntegraComex.</p>
+    </div>
 </div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label asp-for="CUIT" class="form-label"></label>
+                <input asp-for="CUIT" class="form-control" id="cuitInput" placeholder="Ingrese el CUIT..." />
+                <span asp-validation-for="CUIT" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="RazonSocial" class="form-label"></label>
+                <input asp-for="RazonSocial" type="text" class="form-control" id="razonSocialInput"
+                        placeholder="Ingrese el CUIT para obtener la Razón Social automáticamente..." />
+                <span asp-validation-for="RazonSocial" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Telefono" class="form-label"></label>
+                <input asp-for="Telefono" class="form-control" placeholder="Ej: 1187654321" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Direccion" class="form-label"></label>
+                <input asp-for="Direccion" class="form-control" placeholder="Calle y número" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-4">
+                <input asp-for="Activo" class="form-check-input" />
+                <label asp-for="Activo" class="form-check-label"></label>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary px-4">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+

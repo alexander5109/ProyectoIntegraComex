@@ -1,46 +1,116 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ProyectoComex</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ProyectoComex.styles.css" asp-append-version="true" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>@ViewData["Title"] - ProyectoComex</title>
+
+
+
+	<meta name="description" content="Un CRUD básico con ASP .net MVC" />
+	<meta name="author" content="Alexander Seling" />
+	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+
+	@* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
+	@* <link rel="stylesheet" href="~/ProyectoComex.styles.css" asp-append-version="true" /> *@
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+	<!-- Responsive navbar-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container">
+			<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active" aria-current="page" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-    <footer class="border-top footer text-muted">
+
+
+
+
+	<!-- Header - set the background image for the header in the line below-->
+	@*  Template era 1600x900 *@
+
+	
+	@* <header class="py-5 bg-image-full" style="background-image: url('https://picsum.photos/1600/900')" > *@
+
+	<header class="py-3 bg-image-full" style="background-image: url('@Url.Content("~/assets/1633x980.jpg")')">
+
+		<div class="text-center my-5">
+			@* <img class="img-fluid rounded-circle mb-4" src="https://picsum.photos/150/150" alt="..." /> *@
+			<h1 class="text-white fs-3 fw-bolder">@ViewBag.Title</h1>
+			<p class="text-white-50 mb-0">@ViewBag.Subtitle</p>
+		</div>
+	</header>
+
+
+
+	<!-- Content section-->
+	<section class="py-5">
+		<div class="container my-5">
+
+			@RenderBody()
+
+			@* <div class="row justify-content-center">
+				<div class="col-lg-6">
+					<h2>Full Width Backgrounds</h2>
+					<p class="lead">A single, lightweight helper class allows you to add engaging, full width background images to sections of your page.</p>
+					<p class="mb-0">The universe is almost 14 billion years old, and, wow! Life had no problem starting here on Earth! I think it would be inexcusably egocentric of us to suggest that we're alone in the universe.</p>
+				</div>
+			</div> *@
+		</div>
+	</section>
+
+
+
+
+	<!-- Image element - set the background image for the header in the line below-->
+	@* original was 1200x800 *@
+	@* <div class="py-5 bg-image-full" style="background-image: url('https://api.integracomex.com.ar/cache/slides/1749758838-tecnologia-de-punta-en-comex.svg')"> *@
+	@* <div class="py-5 bg-image-full" style="background-image: url('https://picsum.photos/1200/800')">
+		<!-- Put anything you want here! The spacer below with inline CSS is just for demo purposes!-->
+		<div style="height: 20rem"></div>
+	</div> *@
+
+
+
+
+
+
+
+
+	<!-- Footer-->
+	<footer class="py-5 bg-dark">
+		<div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+	</footer>
+
+
+
+
+	<!-- Bootstrap core JS-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+	<!-- Core theme JS-->
+	<script src="~/js/scripts.js"></script>
+
+
+	@* <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - ProyectoComex
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	 *@
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
