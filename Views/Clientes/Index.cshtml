@@ -9,65 +9,62 @@
     ViewBag.Subtitle = "Listado";
 }
 
-<div class="container mt-5">
-    <!-- subtitulos y texto -->
-     <div class="row justify-content-center mb-4">
-        <div class="col-lg-8 text-center">
-            <h2 class="mb-3">Clientes en la base de datos</h2>
-            @* <p class="lead">PArrafo 1.</p> *@
-            @* <p class="mb-0">PArrafo 2.</p> *@
-        </div>
-    </div> 
+<!-- subtitulos y texto -->
+    <div class="row justify-content-center mb-4">
+    <div class="col-lg-8 text-center">
+        <h2 class="mb-3">Clientes en la base de datos</h2>
+        @* <p class="lead">PArrafo 1.</p> *@
+        @* <p class="mb-0">PArrafo 2.</p> *@
+    </div>
+</div> 
 
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <table class="table table-bordered table-hover shadow-sm">
-                <thead class="table-light">
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <table class="table table-bordered table-hover shadow-sm">
+            <thead class="table-light">
+                <tr>
+                    <th>Id</th>
+                    <th>CUIT</th>
+                    <th>Razón Social</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Activo</th>
+                    <th>Enlace</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <th>Id</th>
-                        <th>CUIT</th>
-                        <th>Razón Social</th>
-                        <th>Teléfono</th>
-                        <th>Dirección</th>
-                        <th>Activo</th>
-                        <th>Enlace</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.CUIT</td>
-                            <td>@item.RazonSocial</td>
-                            <td>@item.Telefono</td>
-                            <td>@item.Direccion</td>
-                            <td>@(item.Activo ? "Sí" : "No")</td>
-                            <td>
-                                <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning btn-sm me-2">Editar</a>
-                                <a href="#" class="btn btn-danger btn-sm delete-link" data-id="@item.Id">Eliminar</a>
-                            </td>
+                        <td>@item.Id</td>
+                        <td>@item.CUIT</td>
+                        <td>@item.RazonSocial</td>
+                        <td>@item.Telefono</td>
+                        <td>@item.Direccion</td>
+                        <td>@(item.Activo ? "Sí" : "No")</td>
+                        <td>
+                            <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning btn-sm me-2">Editar</a>
+                            <a href="#" class="btn btn-danger btn-sm delete-link" data-id="@item.Id">Eliminar</a>
+                        </td>
 
                             
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-            <!-- accion para eliminar, manejado por js -->
-            <form id="deleteForm" method="post" asp-action="Delete" asp-controller="Clientes">
-                <input type="hidden" name="id" id="deleteId" />
-            </form>
-        </div>
+        <!-- accion para eliminar, manejado por js -->
+        <form id="deleteForm" method="post" asp-action="Delete" asp-controller="Clientes">
+            <input type="hidden" name="id" id="deleteId" />
+        </form>
     </div>
+</div>
 
     
 
-    <!-- Botón Agregar centrado -->
-    <div class="row justify-content-center mb-4">
-        <div class="col-lg-4 text-center">
-            <a asp-action="Create" asp-controller="Clientes" class="btn btn-primary">Agregar nuevo cliente</a>
-        </div>
+<!-- Botón Agregar centrado -->
+<div class="row justify-content-center mb-4">
+    <div class="col-lg-4 text-center">
+        <a asp-action="Create" asp-controller="Clientes" class="btn btn-primary">Agregar nuevo cliente</a>
     </div>
-
 </div>
