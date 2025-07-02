@@ -44,8 +44,11 @@
                             <td>@item.Direccion</td>
                             <td>@(item.Activo ? "Sí" : "No")</td>
                             <td>
-                                <a href="#" class="delete-link text-danger" data-id="@item.Id">Eliminar</a>
+                                <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning btn-sm me-2">Editar</a>
+                                <a href="#" class="btn btn-danger btn-sm delete-link" data-id="@item.Id">Eliminar</a>
                             </td>
+
+                            
                         </tr>
                     }
                 </tbody>
