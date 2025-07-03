@@ -29,11 +29,15 @@ namespace ProyectoComex.Controllers {
 
 
 		[AcceptVerbs("GET", "POST")]
-		public async Task<IActionResult> ClienteCUITExists(string cuit) {
-			if (await _service.ClienteCUITExists(cuit)) {
-				return Json($"Ya existe un cliente con el CUIT {cuit}.");
+		public async Task<IActionResult> Exists(string cuit) {
+			if (string.IsNullOrEmpty(cuit) || !cuit.All(char.IsDigit)) {
+				return Json("Backend response: El CUIT debe contener solo digitos.");
 			}
-			return Json(true);
+			bool exists = await _service.ClienteCUITExists(cuit);
+			if (exists) {
+				return Json("Backend response: Ya existe un cliente con ese CUIT.");
+			}
+			return Json(false); // válido
 		}
 
 
