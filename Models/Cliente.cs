@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoComex.Models {
 	public class Cliente {
+		[Key]
 		public int Id { get; set; }
 
+		[Remote(action: "ValidateCUIT", controller: "Clientes")]
 		[Required(ErrorMessage = "El CUIT es obligatorio.")]
 		[StringLength(11, MinimumLength = 11, ErrorMessage = "El CUIT debe tener 11 digitos")]
 		public string CUIT { get; set; }

@@ -25,6 +25,7 @@
                 <label asp-for="CUIT" class="form-label"></label>
                 <input asp-for="CUIT" class="form-control" id="cuitInput" placeholder="Ingrese el CUIT..." />
                 <span asp-validation-for="CUIT" class="text-danger"></span>
+                <partial name="_ValidationScriptsPartial" />
             </div>
 
             <div class="mb-3">

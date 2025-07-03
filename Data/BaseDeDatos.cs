@@ -14,7 +14,10 @@ namespace ProyectoComex.Data {
 			return await _context.Clientes.ToListAsync();
 		}
 
-
+		public async Task<bool> ClienteCUITExists(string cuit) {
+			return await _context.Clientes.AnyAsync(c => c.CUIT == cuit);
+		}
+		
 
 		public async Task<Cliente?> ReadOneCliente(int id) {
 			return await _context.Clientes.FindAsync(id);

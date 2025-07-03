@@ -10,6 +10,9 @@ namespace ProyectoComex.Data {
 		protected override void OnModelCreating(ModelBuilder modelBuilder) {
 			base.OnModelCreating(modelBuilder);
 
+			// asegurar que el campo cuit sea unico en la db
+			modelBuilder.Entity<Cliente>().HasIndex(c => c.CUIT).IsUnique();
+
 			modelBuilder.Entity<Cliente>().HasData(
 				new Cliente {
 					Id = 1,
@@ -35,7 +38,6 @@ namespace ProyectoComex.Data {
 					Direccion = "San Martín 456",
 					Activo = false
 				}
-			// ...otros
 			);
 		}
 

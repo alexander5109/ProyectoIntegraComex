@@ -13,6 +13,9 @@ namespace ProyectoComex.Controllers {
 		
 		[HttpGet]
 		public async Task<IActionResult> GetRazonSocial(string cuit) {
+			if (!cuit.All(char.IsDigit)) {
+				return BadRequest("El CUIT debe contener solo dígitos.");
+			}
 			using var httpClient = new HttpClient();
 			var url = $"https://sistemaintegracomex.com.ar/Account/GetNombreByCuit?cuit={cuit}";
 
@@ -25,6 +28,18 @@ namespace ProyectoComex.Controllers {
 		}
 
 
+		[AcceptVerbs("GET", "POST")]
+		public async Task<IActionResult> ValidateCUIT(string cuit) {
+			if (await _service.ClienteCUITExists(cuit)) {
+				return Json($"Ya existe un cliente con el CUIT {cuit}.");
+			}
+			return Json(true);
+		}
+
+
+
+
+
 		//CreateCliente
 		[HttpGet]
 		public IActionResult Create() {
@@ -32,12 +47,15 @@ namespace ProyectoComex.Controllers {
 		}
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create(Cliente cliente) {
+		public async Task<IActionResult> Create(Cliente remotecliente) {
+			if (await _service.ClienteCUITExists(remotecliente.CUIT)) {
+				ModelState.AddModelError("CUIT", "Ya existe un cliente con ese CUIT.");
+			}
 			if (ModelState.IsValid) {
-				await _service.CreateCliente(cliente);
+				await _service.CreateCliente(remotecliente);
 				return RedirectToAction("Index");
 			}
-			return View(cliente);
+			return View(remotecliente);
 		}
 
 
@@ -62,6 +80,9 @@ namespace ProyectoComex.Controllers {
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Update(Cliente remotecliente) {
+			if (await _service.ClienteCUITExists(remotecliente.CUIT)) {
+				ModelState.AddModelError("CUIT", "Ya existe un cliente con ese CUIT.");
+			}
 			if (ModelState.IsValid) {
 				await _service.UpdateCliente(remotecliente);
 				return RedirectToAction("Index");   //simply return the get version of the page

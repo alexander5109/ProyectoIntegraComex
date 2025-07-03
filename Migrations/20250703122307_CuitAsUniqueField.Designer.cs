@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoComex.Data;
 
@@ -10,9 +11,11 @@ using ProyectoComex.Data;
 namespace ProyectoComex.Migrations
 {
     [DbContext(typeof(ComexContext))]
-    partial class ComexContextModelSnapshot : ModelSnapshot
+    [Migration("20250703122307_CuitAsUniqueField")]
+    partial class CuitAsUniqueField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
