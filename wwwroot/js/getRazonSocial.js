@@ -5,7 +5,7 @@
     if (cuitInput && razonSocialInput) {
         cuitInput.addEventListener('change', function () {
             var cuit = this.value;
-            if (cuit.length === 11) {
+            if (cuit.length === 11 && /^\d+$/.test(cuit)) {
                 fetch(`/Clientes/GetRazonSocial?cuit=${cuit}`)
                     .then(response => response.text())
                     .then(cadena => {
