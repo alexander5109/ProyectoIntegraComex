@@ -6,7 +6,7 @@ namespace ProyectoComex.Models {
 		[Key]
 		public int Id { get; set; }
 
-		[Remote(action: "ValidateCUIT", controller: "Clientes")]
+		[Remote(action: "ClienteCUITExists", controller: "Clientes")]
 		[Required(ErrorMessage = "El CUIT es obligatorio.")]
 		[StringLength(11, MinimumLength = 11, ErrorMessage = "El CUIT debe tener 11 digitos")]
 		public string CUIT { get; set; }
